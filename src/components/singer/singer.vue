@@ -9,6 +9,7 @@
   import {ERR_OK} from 'api/config'
   import Singer from 'common/js/singer'
   import listview from 'base/listview/listview'
+
   const hotName = '热门'
   const hotSingerLength = 10
   export default {
@@ -22,8 +23,9 @@
     },
     methods: {
       selectSinger(singer) {
+        console.log(singer)
         this.$router.push({
-          path: `/d/:${singer.id}`
+          path: `/singer/:${singer.id}`
         })
       },
       _initSingerList() {

@@ -4,7 +4,11 @@
   </transition>
 </template>
 <script type="text/ecmascript-6">
-  export default{}
+  export default {
+    created() {
+      console.log(this.$route.id)
+    }
+  }
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
   @import "~common/stylus/variable"
@@ -19,6 +23,7 @@
 
   .slider-enter-active, .slider-leave-active
     transition: all 0.2s
+
   .slider-enter, .slider-leave-to
     transform: translate3d(100%, 0, 0)
 </style>
