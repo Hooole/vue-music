@@ -53,7 +53,6 @@
         this.scroll && this.scroll.disabled()
       },
       refresh() {
-        console.log('执行了')
         this.scroll && this.scroll.refresh()
       },
       scrollTo() {
