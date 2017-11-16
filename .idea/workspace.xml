@@ -4,18 +4,7 @@
     <bookmark url="file://$PROJECT_DIR$/src/common/js/dom.js" line="15" mnemonic="9" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0da7bad3-cdc3-4841-9a9d-b9a59fcc4419" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/api/singer.js" afterPath="$PROJECT_DIR$/src/api/singer.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/common/js/jsonp.js" afterPath="$PROJECT_DIR$/src/common/js/jsonp.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/singer/singer.vue" afterPath="$PROJECT_DIR$/src/components/singer/singer.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/singerDetail/singerdetail.vue" afterPath="$PROJECT_DIR$/src/components/singerDetail/singerdetail.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main.js" afterPath="$PROJECT_DIR$/src/main.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/router/index.js" afterPath="$PROJECT_DIR$/src/router/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/store/index.js" afterPath="$PROJECT_DIR$/src/store/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/store/state.js" afterPath="$PROJECT_DIR$/src/store/state.js" />
-    </list>
+    <list default="true" id="0da7bad3-cdc3-4841-9a9d-b9a59fcc4419" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -505,12 +494,12 @@
       <workItem from="1510303440073" duration="2644000" />
       <workItem from="1510536745954" duration="1844000" />
       <workItem from="1510630481868" duration="16000" />
-      <workItem from="1510712111169" duration="15598000" />
+      <workItem from="1510712111169" duration="15755000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="124427000" />
+    <option name="totallyTimeSpent" value="124584000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1924" height="1056" extended-state="1" />
