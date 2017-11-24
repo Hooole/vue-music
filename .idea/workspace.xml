@@ -11,7 +11,7 @@
       <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/music.iml" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/watcherTasks.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -578,12 +578,12 @@
       <workItem from="1510712111169" duration="15755000" />
       <workItem from="1510797546464" duration="11727000" />
       <workItem from="1511162534019" duration="2885000" />
-      <workItem from="1511492058180" duration="34000" />
+      <workItem from="1511492058180" duration="107000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="160831000" />
+    <option name="totallyTimeSpent" value="160904000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
