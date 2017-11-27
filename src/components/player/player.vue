@@ -73,6 +73,7 @@
     </transition>
     <audio ref="audio" :src="currentSong.url"
            @canplay="ready"
+           @ended="ended"
            @error="error"
            @timeupdate="_getCurrentTime"></audio>
   </div>
@@ -213,6 +214,13 @@
       },
       error() {
         this.songReady = true
+      },
+      ended() {
+        let index = this.currentIndex + 1
+        if (index === this.playList.length - 1) {
+          index = 0
+        }
+        this.setCurrentIndex(index)
       },
       _getCurrentTime(e) {
         this.currentTime = e.target.currentTime
