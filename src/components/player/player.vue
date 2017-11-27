@@ -149,6 +149,7 @@
       afterEnter(el, done) {
         animations.unregisterAnimation('move')
         this.$refs.cdWrapper.style.animation = ''
+        console.log(111)
       },
       leave(el, done) {
         this.$refs.cdWrapper.style.transition = 'all 0.4s'
