@@ -17,7 +17,11 @@
           <h1 class="title" v-html="currentSong.name"></h1>
           <h2 class="subtitle" v-html="currentSong.album"></h2>
         </div>
-        <div class="middle">
+        <div class="middle"
+             @touchstart.prevent="middleStart"
+             @touchmove.prevent="middleMove"
+             @touchend="middleEnd"
+        >
           <div class="middle-l">
             <div class="cd-wrapper" ref="cdWrapper">
               <div class="cd" :class="cdCls">
@@ -25,8 +29,22 @@
               </div>
             </div>
           </div>
+          <scroll class="middle-r" ref="lyricList" :data="currentLyric && currentLyric.lines">
+            <div class="lyric-wrapper">
+              <div v-if="currentLyric">
+                <p class="text"
+                   ref="lyricLine"
+                   :class="{current:currentLineNum === index}"
+                   v-for="(line,index) in currentLyric.lines">{{line.txt}}</p>
+              </div>
+            </div>
+          </scroll>
         </div>
         <div class="bottom">
+          <div class="dot-wrapper">
+            <div class="dot" :class="{'active':currentShow === 'cd'}"></div>
+            <div class="dot" :class="{'active':currentShow === 'lyric'}"></div>
+          </div>
           <div class="progress-wrapper">
             <span class="time time-l">{{format(currentTime)}}</span>
             <div class="progress-bar-wrapper">
@@ -64,7 +82,7 @@
           <p class="desc" v-html="currentSong.album"></p>
         </div>
         <div class="control">
-          <progress-circle :radius="32" :percent="percent">
+          <progress-circle :radius="radius" :percent="percent">
             <i :class="miniIcon" class="icon-mini" @click.stop="togglePlaying"></i>
           </progress-circle>
         </div>
@@ -89,13 +107,19 @@
   import ProgressCircle from 'base/progress-circle/progress-circle'
   import {playMode} from 'common/js/config'
   import {shuffle} from 'common/js/util'
+  import Lyric from 'lyric-parser'
+  import Scroll from 'base/scroll/scroll'
 
   const transform = prefixStyle('transform')
   export default {
     data() {
       return {
         songReady: false,
-        currentTime: 0
+        currentTime: 0,
+        radius: 32,
+        currentLyric: null,
+        currentLineNum: 0,
+        currentShow: 'cd'
       }
     },
     computed: {
@@ -126,6 +150,9 @@
         'mode',
         'sequenceList'
       ])
+    },
+    created() {
+      this.touch = {}
     },
     methods: {
       back() {
@@ -240,6 +267,47 @@
       _getCurrentTime(e) {
         this.currentTime = e.target.currentTime
       },
+      _getLyric() {
+        this.currentSong.getLyric().then((lyric) => {
+          this.currentLyric = new Lyric(lyric, this.handleLyric)
+          if (this.playing) {
+            this.currentLyric.play()
+          }
+          console.log(this.currentLyric)
+        })
+      },
+      handleLyric({lineNum, txt}) {
+        this.currentLineNum = lineNum
+        if (lineNum > 5) {
+          let lineEl = this.$refs.lyricLine[lineNum - 5]
+          this.$refs.lyricList.scrollToElement(lineEl, 1000)
+        } else {
+          this.$refs.lyricList.scrollTo(0, 0, 1000)
+        }
+      },
+      middleStart(e) {
+        this.touch.init = true
+        let touch = e.touches[0]
+        this.touch.startX = touch.pageX
+        this.touch.startY = touch.pageY
+      },
+      middleMove(e) {
+        if (!this.touch.init) {
+          return
+        }
+        let touch = e.touches[0]
+        let deltaX = touch.pageX - this.touch.startX
+        let deltaY = touch.pageY - this.touch.startY
+        if (Math.abs(deltaY) > Math.abs(deltaX)) {
+          return
+        }
+        let left = this.currentShow === 'cd' ? 0 : -window.innerWidth
+        let width = Math.min(0, Math.max(-window.innerWidth, left + deltaX))
+        this.$refs.lyricList.$el.style[transform] = `translate3d(${width}px,0,0)`
+      },
+      middleEnd(e) {
+
+      },
       format(interval) {
         interval = interval | 0
         let minute = interval / 60 | 0
@@ -293,6 +361,7 @@
         }
         this.$nextTick(() => {
           this.$refs.audio.play()
+          this._getLyric()
         })
       },
       playing(newPlaying) {
@@ -304,7 +373,8 @@
     },
     components: {
       ProgressBar,
-      ProgressCircle
+      ProgressCircle,
+      Scroll
     }
   }
 </script>
