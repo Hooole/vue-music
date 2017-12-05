@@ -15,7 +15,7 @@
             <i class="icon-back"></i>
           </div>
           <h1 class="title" v-html="currentSong.name"></h1>
-          <h2 class="subtitle" v-html="currentSong.album"></h2>
+          <h2 class="subtitle" v-html="currentSong.singer"></h2>
         </div>
         <div class="middle"
              @touchstart.prevent="middleStart"
