@@ -17,7 +17,7 @@
     <scroll :data="songs" @scroll="scroll" :probe-type="probeType" :listen-scroll="listenScroll" class="list"
             ref="list">
       <div class="song-list-wrapper">
-        <song-list :songs="songs" @select="selectItem"></song-list>
+        <song-list :songs="songs" :rank="rank" @select="selectItem"></song-list>
       </div>
       <div class="loading-container" v-show="!songs.length">
         <loading></loading>
@@ -29,14 +29,15 @@
 <script type="text/ecmascript-6">
   import Scroll from 'base/scroll/scroll'
   import SongList from 'base/song-list/song-list'
-  import {prefixStyle} from 'common/js/dom'
+  import { prefixStyle } from 'common/js/dom'
   import Loading from 'base/loading/loading'
-  import {mapActions} from 'vuex'
-  import {playlistMixins} from 'common/js/mixin'
+  import { mapActions } from 'vuex'
+  import { playlistMixins } from 'common/js/mixin'
+
   const RESERVED_HEIGHT = 40
   const transform = prefixStyle('transform')
   const backdrop = prefixStyle('backdrop-filter')
-  export default{
+  export default {
     mixins: [playlistMixins],
     props: {
       bgImage: {
@@ -50,50 +51,54 @@
       title: {
         type: String,
         default: ''
+      },
+      rank: {
+        type: Boolean,
+        default: false
       }
     },
-    data() {
+    data () {
       return {
         scrollY: 0
       }
     },
     computed: {
-      bgStyle() {
+      bgStyle () {
         return `background-image:url("${this.bgImage}")`
       }
     },
-    created() {
+    created () {
       this.probeType = 3
       this.listenScroll = true
     },
-    mounted() {
+    mounted () {
       this.imageHeight = this.$refs.bgImage.clientHeight
       this.minTranslateY = -this.imageHeight + RESERVED_HEIGHT
       this.$refs.list.$el.style.top = `${this.imageHeight}px`
       this.scroll()
     },
     methods: {
-      handlePlayList(playList) {
+      handlePlayList (playList) {
         const bottom = playList.length > 0 ? '60px' : 0
         this.$refs.list.$el.style.bottom = bottom
         this.$refs.list.refresh()
       },
-      scroll(pos) {
+      scroll (pos) {
         if (!pos) {
           return
         }
         this.scrollY = pos.y
       },
-      back() {
+      back () {
         this.$router.back()
       },
-      selectItem(item, index) {
+      selectItem (item, index) {
         this.selectPlay({
           list: this.songs,
           index
         })
       },
-      random() {
+      random () {
         this.randomPlay({
           list: this.songs
         })
@@ -104,7 +109,7 @@
       ])
     },
     watch: {
-      scrollY(newY) {
+      scrollY (newY) {
         let zIndex = 0
         let translateY = Math.max(this.minTranslateY, newY)
         let scale = 1

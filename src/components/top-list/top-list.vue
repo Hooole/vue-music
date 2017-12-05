@@ -1,40 +1,42 @@
 <template>
   <transition name="slider">
-    <music-list :title="title" :bgImage="bgImage" :songs="topSongs"></music-list>
+    <music-list :title="title" :rank="rank" :bgImage="bgImage" :songs="topSongs"></music-list>
   </transition>
 </template>
 <script type="text/ecmascript-6">
   import MusicList from 'components/music-list/music-list'
-  import {mapGetters} from 'vuex'
-  import {getMusicList} from 'api/rank'
-  import {ERR_OK} from 'api/config'
-  import {createSong} from 'common/js/song'
+  import { mapGetters } from 'vuex'
+  import { getMusicList } from 'api/rank'
+  import { ERR_OK } from 'api/config'
+  import { createSong } from 'common/js/song'
+
   export default {
-    data() {
+    data () {
       return {
-        topSongs: []
+        topSongs: [],
+        rank: true
       }
     },
     computed: {
-      bgImage() {
+      bgImage () {
         if (this.topSongs.length) {
           return this.topSongs[0].image
         } else {
           return ''
         }
       },
-      title() {
+      title () {
         return this.topList.topTitle
       },
       ...mapGetters([
         'topList'
       ])
     },
-    created() {
+    created () {
       this._getMusicList()
     },
     methods: {
-      _getMusicList() {
+      _getMusicList () {
         if (!this.topList.id) {
           this.$router.push('/rank')
           return
@@ -42,11 +44,10 @@
         getMusicList(this.topList.id).then((res) => {
           if (res.code === ERR_OK) {
             this.topSongs = this._normalizeSongs(res.songlist)
-            console.log(this.topSongs)
           }
         })
       },
-      _normalizeSongs(list) {
+      _normalizeSongs (list) {
         let ret = []
         list.forEach((item) => {
           let musicData = item.data
