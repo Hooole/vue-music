@@ -31,3 +31,23 @@ export function getDiscList() {
     return Promise.resolve(res.data)
   })
 }
+
+export function getSongList(dissid) {
+  const url = '/api/getCdInfo'
+  const data = Object.assign({}, commonParams, {
+    disstid: dissid,
+    type: 1,
+    json: 1,
+    utf8: 1,
+    loginUin: 0,
+    hostUin: 0,
+    needNewCode: 0,
+    onlysong: 0,
+    platform: 'yqq'
+  })
+  return axios.get(url, {
+    params: data
+  }).then((res) => {
+    return Promise.resolve(res.data)
+  })
+}
